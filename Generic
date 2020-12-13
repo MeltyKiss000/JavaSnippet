@@ -1,0 +1,82 @@
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+
+public class CustomSort {
+    public static void main(String[] args) {
+        Circle[] circles = {
+                new Circle(19),
+                new Circle(13),
+                new Circle(18)
+        };
+
+        HashSet<Object> objects = new HashSet<>();
+
+        new MathOperation<Circle>().selectionSort(circles);
+        for (Circle circle : circles) System.out.println(circle);
+    }
+}
+
+class MathOperation<T extends Comparable> {
+    public void bubbleSort(T[] arr) {
+        T temp;
+        boolean flag = false;
+        for (int i = 0; i < arr.length - 1 ; i++) {
+            for (int j = 0; j < arr.length - 1 - i ; j++) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    flag = true;
+                }
+            }
+            if (!flag) break;
+        }
+    }
+
+    public void selectionSort(T[] arr) {
+        T min;
+        int index;
+        for (int i = 0; i < arr.length - 1; i++) {
+            min = arr[i];
+            index = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (min.compareTo(arr[j]) > 0) {
+                    min = arr[j];
+                    index = j;
+                }
+            }
+
+            if (i != index) {
+                arr[index] = arr[i];
+                arr[i] = min;
+            }
+        }
+    }
+}
+
+class DXY<T1, T2 extends Number & Comparable & Serializable> {
+    private T1 name;
+    private T2 gae;
+
+    public DXY(T1 name, T2 gae) {
+        this.name = name;
+        this.gae = gae;
+    }
+
+    public T1 getName() {
+        return name;
+    }
+
+    public void setName(T1 name) {
+        this.name = name;
+    }
+
+    public T2 getGae() {
+        return gae;
+    }
+
+    public void setGae(T2 gae) {
+        this.gae = gae;
+    }
+}
